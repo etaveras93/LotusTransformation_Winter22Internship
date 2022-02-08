@@ -13,17 +13,6 @@ namespace LotusTransformation.Models
 
         public DbSet<UserInformation>? UserInformation { get; set; }
 
-        public DbSet<LogIn>? logIns { get; set; }    
-    }
-
-    public class LotusTransformationDbContextFactory : IDesignTimeDbContextFactory<LotusTransformationDBContext>
-    {
-        public LotusTransformationDBContext CreateDbContext(string[] args)
-        {
-            var optionsBuilder = new DbContextOptionsBuilder<LotusTransformationDBContext>();
-            optionsBuilder.UseSqlServer("LotusTransformationDb");
-
-            return new LotusTransformationDBContext(optionsBuilder.Options);
-        }
+        public DbSet<LogIn>? logIns { get; set; }
     }
 }

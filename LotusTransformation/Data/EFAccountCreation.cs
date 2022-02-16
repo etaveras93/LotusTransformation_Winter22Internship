@@ -1,6 +1,7 @@
 ﻿using System.Linq;
+using LotusTransformation.Models;
 
-namespace LotusTransformation.Models
+namespace LotusTransformation.Data
 {
     public class EFAccountCreation : IAccountCreation
     {

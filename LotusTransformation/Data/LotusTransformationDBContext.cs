@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using LotusTransformation.Models;
 
-namespace LotusTransformation.Models
+namespace LotusTransformation.Data
 
 {
     public class LotusTransformationDBContext : DbContext
@@ -13,7 +14,7 @@ namespace LotusTransformation.Models
 
         public DbSet<UserInformation>? UserInformation { get; set; }
 
-        public DbSet<LogIn>? logIns { get; set; }    
+        public DbSet<LogIn>? LogIns { get; set; }    
     }
 
     public class LotusTransformationDbContextFactory : IDesignTimeDbContextFactory<LotusTransformationDBContext>

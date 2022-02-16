@@ -7,11 +7,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using LotusTransformation.Services;
 using LotusTransformation.Models;
+using LotusTransformation.ViewModels;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using LotusTransformation.Data;
 
 
 namespace LotusTransformation
@@ -27,7 +28,7 @@ namespace LotusTransformation
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddScoped<LogIn>();
+            services.AddScoped<UserSignUpVM>();
             services.AddMvcCore().AddRazorRuntimeCompilation();
             services.AddDbContext<LotusTransformationDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("LotusTransformationDb")));
             services.AddScoped<IAccountCreation, EFAccountCreation>();

@@ -1,4 +1,4 @@
-﻿@model LotusTransformation.Models.UserInformation;
+﻿@model LotusTransformation.ViewModels.UserSignUpVM;
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 
@@ -81,6 +81,12 @@
                     <label class="col-form-label-lg" asp-for="StateOrProvince">State or Province</label>
                     <input type="text" asp-for="StateOrProvince" />
                     <span asp-validation-for="StateOrProvince"></span>
+                </div>
+
+                <div class="formgroup">
+                    <label class="col-form-label-lg" asp-for="ZIPorPostal">Zip or Postal Code</label>
+                    <input type="text" asp-for="ZIPorPostal"/>
+                    <span asp-validation-for="ZIPorPostal"></span>
                 </div>
 
                 <div class="formgroup">

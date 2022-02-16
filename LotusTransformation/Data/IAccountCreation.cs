@@ -1,6 +1,6 @@
 ﻿using System.Linq;
-
-namespace LotusTransformation.Models
+using LotusTransformation.Models;
+namespace LotusTransformation.Data
 {
     public interface IAccountCreation
     {

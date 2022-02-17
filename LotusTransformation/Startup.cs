@@ -1,17 +1,10 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using LotusTransformation.Models;
 using LotusTransformation.ViewModels;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Design;
 using LotusTransformation.Data;
 
 
@@ -29,9 +22,10 @@ namespace LotusTransformation
         {
             services.AddControllersWithViews();
             services.AddScoped<UserSignUpVM>();
+            services.AddScoped<ExistingUserVM>();
             services.AddMvcCore().AddRazorRuntimeCompilation();
             services.AddDbContext<LotusTransformationDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("LotusTransformationDb")));
-            services.AddScoped<IAccountCreation, EFAccountCreation>();
+            
            
             
         }

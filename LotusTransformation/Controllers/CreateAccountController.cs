@@ -1,19 +1,18 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using LotusTransformation.Data;
 using LotusTransformation.Models;
 using LotusTransformation.ViewModels;
-using LotusTransformation.Data;
+using Microsoft.AspNetCore.Mvc;
 
 namespace LotusTransformation.Controllers
 {
     public class CreateAccountController : Controller
     {
-
-        private LotusTransformationDBContext _efac;
+        
+        private readonly LotusTransformationDBContext _efac;
+        private ExistingUserVM _existingUser;
 
         public CreateAccountController(LotusTransformationDBContext Acc)
         {
@@ -29,6 +28,9 @@ namespace LotusTransformation.Controllers
         [HttpPost][RequireHttps]
         public IActionResult AccountCreation(UserSignUpVM NewUser)
         {
+
+            _existingUser = new ExistingUserVM() { Account = _efac.UserInformation };
+
             if (ModelState.IsValid)
             {
                 UserInformation user = new UserInformation()
@@ -53,7 +55,21 @@ namespace LotusTransformation.Controllers
                     Address2 = NewUser.Address2,
                 };
 
+                LogIn logIn = new LogIn()
+                {
+                    UserName = NewUser.UserName,
+                    Password = NewUser.Password,
+                    Email = NewUser.PrimaryEmail,
+                    
+                };
+
+
+               // if (_existingUser.Account.Select(A => A.PrimaryEmail).Contains(NewUser.PrimaryEmail)) return View();// TODO: Make Email Already Exists View
+                // if (_existingUser.Account.Select(A => A.SecondaryEmail).Contains(NewUser.SecondaryEmail)) return View(); //TODO: Make Backup email Already In use View
+                // if (_existingUser.Account.Select(A => A.UserName).Contains(NewUser.UserName)) return View(); // TODO: Make UserName Already in Use View
+
                 _efac.Add(user);
+                _efac.Add(logIn);
                 _efac.SaveChanges();
 
                 return View("CreationSuccess");

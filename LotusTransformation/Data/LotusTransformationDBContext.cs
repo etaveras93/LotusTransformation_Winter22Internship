@@ -1,30 +1,34 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using LotusTransformation.Models;
 
 namespace LotusTransformation.Data
-
 {
     public class LotusTransformationDBContext : DbContext
     {
+        
+        
+      
+       
         public LotusTransformationDBContext(DbContextOptions<LotusTransformationDBContext> options) : base(options)
         {
             Database.EnsureCreated();
         }
 
-        public DbSet<UserInformation>? UserInformation { get; set; }
+        public DbSet<UserInformation> UserInformation { get; set; }
 
-        public DbSet<LogIn>? LogIns { get; set; }    
-    }
-
-    public class LotusTransformationDbContextFactory : IDesignTimeDbContextFactory<LotusTransformationDBContext>
-    {
-        public LotusTransformationDBContext CreateDbContext(string[] args)
+        public DbSet<LogIn> LogIns { get; set; }    
+       
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            var optionsBuilder = new DbContextOptionsBuilder<LotusTransformationDBContext>();
-            optionsBuilder.UseSqlServer("LotusTransformationDb");
+            modelBuilder.Entity<UserInformation>().ToTable("UserInformation");
+            modelBuilder.Entity<LogIn>().ToTable("LogIn");
 
-            return new LotusTransformationDBContext(optionsBuilder.Options);
+            modelBuilder.Entity<UserInformation>()
+                .HasOne<LogIn>(s => s.LogIn)
+                .WithOne(ul => ul.UserInformation)
+                .HasForeignKey<LogIn>(ul => ul.UserID);
         }
     }
 }

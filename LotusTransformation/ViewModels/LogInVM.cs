@@ -4,27 +4,21 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
 
-namespace LotusTransformation.Models
+namespace LotusTransformation.ViewModels
 {
-    [Table("LogIn")]
-    
-    
-    public class LogIn
+    public class LogInVM
     {
 
         [Required]
         [ForeignKey("UserID")]
         [Key()]
-        public long UserID{ get; set; }
+        public long UserID { get; set; }
         public string UserName { get; set; }
 
         public string Email { get; set; }
 
         public string Password { get; set; }
-
-        public virtual UserInformation UserInformation { get; set; }
 
 
     }

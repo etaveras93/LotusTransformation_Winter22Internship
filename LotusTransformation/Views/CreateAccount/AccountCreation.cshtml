@@ -1,4 +1,4 @@
-﻿@model LotusTransformation.Models.UserInformation;
+﻿@model LotusTransformation.ViewModels.UserSignUpVM;
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 
@@ -6,23 +6,18 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@{ 
-    var message = "";
-    
-}
-
-
 <body>
+    <link href=~/CSS~/CSS/ValidationRules.css type="text/css" rel="stylesheet"/>
     <main>
         <h1>Lotus Transformation: Account Creation Form</h1>
 
         <p>
             Hello! Thank you for taking the time to consider creating an account. Although an account is not necessary to use the majority of this website's features,
-            it is necessary if you want to start one on one coaching with me. You understanding and patience is greatly appreciated!
+            it is necessary if you want to start one on one coaching with me. Your understanding and patience is greatly appreciated!
         </p>
 
 
-        <div asp-validation-summary="ModelOnly">
+        <div asp-validation-summary="All">
             <span>Please correct the following:</span>
         </div>
 
@@ -86,6 +81,12 @@
                     <label class="col-form-label-lg" asp-for="StateOrProvince">State or Province</label>
                     <input type="text" asp-for="StateOrProvince" />
                     <span asp-validation-for="StateOrProvince"></span>
+                </div>
+
+                <div class="formgroup">
+                    <label class="col-form-label-lg" asp-for="ZIPorPostal">Zip or Postal Code</label>
+                    <input type="text" asp-for="ZIPorPostal"/>
+                    <span asp-validation-for="ZIPorPostal"></span>
                 </div>
 
                 <div class="formgroup">
